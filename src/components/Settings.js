@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Settings = ({onClose, onCardChange, onBackgroundChange, cardCount, background}) => {
+const Settings = ({onClose, onCardChange, onBackgroundChangeStart, onBackgroundChangeEnd, cardCount, backgroundStart, backgroundEnd}) => {
     const settingsStyle = {
       position: 'fixed',
       top: '50%',
@@ -47,9 +47,13 @@ const Settings = ({onClose, onCardChange, onBackgroundChange, cardCount, backgro
             </select>
            </div>
 
+           <div>
+            <label htmlFor="background">Background Start Color : </label>
+            <input style={backgroundStyle} type="color" value={backgroundStart} id="background" onChange={(e) => onBackgroundChangeStart(e.target.value)} />
+            </div>
             <div>
-            <label htmlFor="background">Background Color : </label>
-            <input style={backgroundStyle} type="color" value={background} id="background" onChange={(e) => onBackgroundChange(e.target.value)} />
+            <label htmlFor="background">Background End Color : </label>
+            <input style={backgroundStyle} type="color" value={backgroundEnd} id="background" onChange={(e) => onBackgroundChangeEnd(e.target.value)} />
             </div>
 
             <button style={buttonStyle} onClick={onClose}>Close</button>

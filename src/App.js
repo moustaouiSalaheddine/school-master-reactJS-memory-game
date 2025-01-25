@@ -8,6 +8,8 @@ import './index.css';
 function App() {
     const [cardCount, setCardCount] = useState(16);
     const [background, setBackground] = useState('#fcc700');
+    const [backgroundStart, setBackgroundStart] = useState('#fcc700');
+    const [backgroundEnd, setBackgroundEnd] = useState('#6f00fc'); 
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
     const [finishedGame, setFinishedGame] = useState(false);
@@ -50,39 +52,62 @@ function App() {
         setCardCount(count);
     };
 
-    const handleBackgroundChange = (color) => {
-        setBackground(color);
+    const handleBackgroundChangeStart = (color) => {
+      setBackgroundStart(color);
+    };
+    const handleBackgroundChangeEnd = (color) => {
+        setBackgroundEnd(color);
+    };
+
+    const formatTime = (totalSeconds) => {
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      
+      let formattedString = '';
+        if(hours > 0){
+          formattedString += `${hours} Hours `;
+        }
+        if(minutes > 0){
+            formattedString += `${minutes} Minutes `;
+        }
+         formattedString += `${seconds} Seconds`;
+      return formattedString;
     };
     return (
+      <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center',
+       background : `linear-gradient(135deg, ${backgroundEnd} 0%,#fc7900 50%,${backgroundStart} 100%)`
+       }}>
         <div style={{
-            width: '100%',
-            height: '100%',
-            background: background,
-            // fontFamily: 'Fredoka', sansSerif,
+            // width: '100%',
+            // height: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <div style={{  width: '100%', padding: '20px', backgroundColor: 'white', borderRadius: '10px'}}>
+          <div style={{  width: '100%', padding: '20px', borderRadius: '10px'}}>
             <h1 style={{ textAlign: 'center'}}>Memory Game</h1>
             <div className="stats" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14pt', color: '#282A3A', fontWeight: 'bold' }}>
              <span>Moves: {score}</span>
-            <span>Time : {gameTime} Sec</span>
-        </div>
-            <GameBoard cardCount={cardCount}  setFinishedGame={setFinishedGame} gameTime={gameTime} setGameTime={setGameTime} setScore={setScore} background={background} />
+             <span>Time : {formatTime(gameTime)}</span>
+            </div>
+            <GameBoard cardCount={cardCount}  setFinishedGame={setFinishedGame} gameTime={gameTime} setGameTime={setGameTime} setScore={setScore} backgroundStart={backgroundStart} backgroundEnd={backgroundEnd}  />
             <Menu gameStarted={gameStarted} openSettings={handleOpenSettings} openHistory={handleOpenHistory} />
           </div>
             {isSettingsOpen && (
                 <Settings
                     cardCount={cardCount}
-                    background={background}
+                    backgroundStart={backgroundStart}
+                    backgroundEnd={backgroundEnd}
                     onCardChange={handleCardChange}
-                    onBackgroundChange={handleBackgroundChange}
+                    onBackgroundChangeStart={handleBackgroundChangeStart}
+                    onBackgroundChangeEnd={handleBackgroundChangeEnd}
                     onClose={handleCloseSettings}
                 />
             )}
             {isHistoryOpen && <History games={games} onClose={handleCloseHistory} />}
         </div>
+      </div>
     );
 }
 

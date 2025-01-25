@@ -32,13 +32,28 @@ const History = ({games, onClose}) => {
       borderRadius: '5px',
     };
 
+    const formatTime = (totalSeconds) => {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        let formattedString = '';
+        if(hours > 0){
+            formattedString += `${hours} Hours `;
+        }
+        if(minutes > 0){
+            formattedString += `${minutes} Minutes `;
+        }
+        formattedString += `${seconds} Seconds`;
+        return formattedString;
+    };
     return (
         <div style={containerStyle}>
-            <h3>History</h3>
+            <h3>Score History</h3>
             {games.length === 0 ? (<p>No Game History</p>) :
                 games.map((game, index) => (
                     <div style={itemStyle} key={index}>
-                      <p>Score: {game.score}, Time: {game.time} s, Date: {new Date(game.date).toLocaleString()} </p>
+                      <p>Moves: {game?.score}, Time: {formatTime(game.time)}, Date: {new Date(game.date).toLocaleString()} </p>
                     </div>
                 ))
             }

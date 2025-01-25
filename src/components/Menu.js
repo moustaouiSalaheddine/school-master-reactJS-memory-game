@@ -6,6 +6,7 @@ const Menu = ({ openSettings, openHistory, gameStarted }) => {
         justifyContent: 'space-around',
         padding: '20px',
         marginBottom: '20px',
+        gap: 15,
     };
     const buttonStyle = {
         background: '#282A3A',
@@ -14,7 +15,6 @@ const Menu = ({ openSettings, openHistory, gameStarted }) => {
         padding: '10px 20px',
         border: '0',
         cursor: 'pointer',
-        // fontFamily: 'Fredoka', cursive,
         fontSize: '18pt',
     };
     const disabledStyle = {
