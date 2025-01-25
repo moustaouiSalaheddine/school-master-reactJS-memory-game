@@ -1,14 +1,12 @@
 body {
-  font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
 }
-#root {
-  width: 100%;
-  max-width: 1000px;
+@font-face {
+    font-family: Fredoka;
+    /* src: url(./FredokaOne-Regular.ttf); */
 }

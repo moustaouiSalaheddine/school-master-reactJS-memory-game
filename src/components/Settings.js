@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Settings = ({onClose, onCardChange, onBackgroundChange, cardCount, background}) => {

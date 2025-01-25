@@ -1,24 +1,28 @@
-
 import React from 'react';
-const Menu = ({openSettings, openHistory}) => {
+
+const Menu = ({ openSettings, openHistory, gameStarted }) => {
     const menuStyle = {
         display: 'flex',
         justifyContent: 'space-around',
         padding: '20px',
-        backgroundColor: '#f0f0f0',
-        marginTop: '20px'
+        marginBottom: '20px',
     };
     const buttonStyle = {
-        padding: '10px 20px',
-        border: 'none',
+        background: '#282A3A',
+        color: '#FFF',
         borderRadius: '5px',
-        backgroundColor: '#3498db',
-        color: 'white',
+        padding: '10px 20px',
+        border: '0',
         cursor: 'pointer',
+        // fontFamily: 'Fredoka', cursive,
+        fontSize: '18pt',
     };
-    return(
-        <div style={menuStyle}>
-            <button style={buttonStyle} onClick={openSettings}>Settings</button>
+    const disabledStyle = {
+        color: '#757575'
+    }
+    return (
+        <div style={menuStyle} className="controls">
+            <button style={!gameStarted ? buttonStyle : {...buttonStyle, ...disabledStyle}} disabled={gameStarted} onClick={openSettings}>Settings</button>
             <button style={buttonStyle} onClick={openHistory}>History</button>
         </div>
     )
